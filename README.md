@@ -515,9 +515,3 @@ npm test
 - 导出创建新文件，不覆盖源数据库。
 - 校验可以发现已知结构与关联问题，但不能保证兼容所有未来游戏版本。
 - 游戏更新可能改变容器、密钥表示、字段、有效值或图片目录。
-
-
-
-<details> <summary>Name history</summary>
-The project originally used a misspelled form of "Editor". The name has now been corrected throughout the source, interface, packages, documentation, repository, and releases.
-</details>
