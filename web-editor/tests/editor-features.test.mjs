@@ -45,4 +45,5 @@ test("launcher distinguishes EMDB editor from an unrelated service", async () =>
   const launcher = await readFile(new URL("../../Start_EMDB_Editor.js", import.meta.url), "utf8");
   assert.match(launcher, /body\.includes\("EMDB Local Editer"\)/);
   assert.match(launcher, /serverStatus === "occupied"/);
+  assert.match(launcher, /existsSync\(lockPath\) \? "ci" : "install"/);
 });

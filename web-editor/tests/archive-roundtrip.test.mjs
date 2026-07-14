@@ -1,9 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strFromU8, strToU8, unzipSync, zipSync } from "fflate";
 
-const sourceArchive = new URL("../../samples/BasicDB_decrypted.zip", import.meta.url);
 const required = [
   "Players.csv",
   "Staff.csv",
@@ -13,14 +11,18 @@ const required = [
   "roster_order.json",
 ];
 
-test("packs and discovers a nested decrypted EMDB ZIP", async () => {
-  const sourceEntries = unzipSync(new Uint8Array(await readFile(sourceArchive)));
-  const entries = {};
-  for (const fileName of required) {
-    const sourcePath = Object.keys(sourceEntries).find((entryPath) => entryPath.split(/[\\/]/).at(-1)?.toLowerCase() === fileName.toLowerCase());
-    assert.ok(sourcePath, `source archive contains ${fileName}`);
-    entries[`database/${fileName}`] = sourceEntries[sourcePath];
-  }
+test("packs and discovers a nested decrypted EMDB ZIP", () => {
+  const fixture = {
+    "Players.csv": "Nick;Name;Surname;Internal ID\nalpha;Alex;Tester;alpha\n",
+    "Staff.csv": "Nick;Name;Surname;Internal ID\ncoach;Casey;Tester;coach\n",
+    "Teams.csv": "Nick;Name\nALP;Alpha Esports\n",
+    "Sponsors.csv": "Id;Name\n1;Example Sponsor\n",
+    "Tournaments.csv": "Name;Country;City\nExample Cup;Germany;Berlin\n",
+    "roster_order.json": '[{"Team":"ALP","Player":"alpha"}]',
+  };
+  const entries = Object.fromEntries(
+    required.map((fileName) => [`database/${fileName}`, strToU8(fixture[fileName])]),
+  );
   entries["database/keep-me.txt"] = strToU8("unrelated archive content");
 
   const unpacked = unzipSync(zipSync(entries, { level: 6 }));

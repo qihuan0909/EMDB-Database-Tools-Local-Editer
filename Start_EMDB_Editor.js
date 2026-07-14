@@ -5,6 +5,7 @@ const path = require("node:path");
 
 const projectDir = path.join(__dirname, "web-editor");
 const cliPath = path.join(projectDir, "node_modules", "vinext", "dist", "cli.js");
+const lockPath = path.join(projectDir, "package-lock.json");
 const localUrl = "http://localhost:3000/";
 
 function print(message) {
@@ -49,7 +50,8 @@ async function installDependencies() {
   if (existsSync(cliPath)) return;
   print("Installing local dependencies for the first launch...");
   const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-  await run(npm, ["install", "--ignore-scripts", "--no-audit", "--no-fund"], {
+  const installMode = existsSync(lockPath) ? "ci" : "install";
+  await run(npm, [installMode, "--ignore-scripts", "--no-audit", "--no-fund"], {
     shell: process.platform === "win32",
   });
 }
