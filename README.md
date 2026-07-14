@@ -2,6 +2,8 @@
 
 ## This project utilized AI applications such as CodeX for generation.
 
+## Due to personal reasons, I will not be maintaining this project in the long term, nor will I address PRs or issues. Please fork the project yourself.
+
 [English](#english) · [简体中文](#简体中文)
 
 An unofficial, local-first toolkit for decrypting, editing, and encrypting
