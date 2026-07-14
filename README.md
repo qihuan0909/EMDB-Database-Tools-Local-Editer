@@ -518,6 +518,6 @@ npm test
 
 
 
-<details>
-Damn, I'm not a native English speaker, and by the time I realized "Editer" was a typo, it was already too late. Oh well.
-</details>
+<secret>
+Damn, I'm not a native English speaker, and by the time I realized "Editer" was a typo, it was already too late. Oh well. -- But I have another explanation: Emdb Database Integrated Tool for Editing Resources (EDITER)
+</secret>
